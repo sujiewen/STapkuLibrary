@@ -77,6 +77,8 @@
 		3B859EAE134C73DE00661088 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 		3B859EB0134C73EF00661088 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BAC995810953DF400F235F1 /* QuartzCore.framework */; };
 		3B89162B134D93D000BD2B31 /* FoundationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B89162A134D93D000BD2B31 /* FoundationTests.m */; };
+		6B6F56A51CCFBAA000C1C7E5 /* TapkuLibrary+S.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B6F56A31CCFBAA000C1C7E5 /* TapkuLibrary+S.h */; };
+		6B6F56A61CCFBAA000C1C7E5 /* TapkuLibrary+S.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6F56A41CCFBAA000C1C7E5 /* TapkuLibrary+S.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -194,6 +196,8 @@
 		3BD32971125B753900BE5EAF /* TKAlertCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAlertCenter.m; sourceTree = "<group>"; };
 		3BEE1CB912CFB78300FECF6D /* TKProgressCircleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKProgressCircleView.h; sourceTree = "<group>"; };
 		3BEE1CBA12CFB78300FECF6D /* TKProgressCircleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKProgressCircleView.m; sourceTree = "<group>"; };
+		6B6F56A31CCFBAA000C1C7E5 /* TapkuLibrary+S.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TapkuLibrary+S.h"; sourceTree = "<group>"; };
+		6B6F56A41CCFBAA000C1C7E5 /* TapkuLibrary+S.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TapkuLibrary+S.m"; sourceTree = "<group>"; };
 		AA747D9E0F9514B9006C5449 /* tapku_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tapku_Prefix.pch; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -312,6 +316,7 @@
 		3BAC98C910953DCC00F235F1 /* tapku */ = {
 			isa = PBXGroup;
 			children = (
+				6B6F569C1CCFBA8D00C1C7E5 /* Extends */,
 				3BAC9A1B10953E5200F235F1 /* TapkuLibrary.h */,
 				3BBF8A4012970B10008AB2B1 /* Core */,
 				3B345A6E142E4F870075E654 /* Network */,
@@ -447,6 +452,15 @@
 			name = Month;
 			sourceTree = "<group>";
 		};
+		6B6F569C1CCFBA8D00C1C7E5 /* Extends */ = {
+			isa = PBXGroup;
+			children = (
+				6B6F56A31CCFBAA000C1C7E5 /* TapkuLibrary+S.h */,
+				6B6F56A41CCFBAA000C1C7E5 /* TapkuLibrary+S.m */,
+			);
+			path = Extends;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -458,6 +472,7 @@
 				204C74071ABA0F9400A68988 /* TKGlobal.h in Headers */,
 				204C74151ABA0F9400A68988 /* UIImage+TKCategory.h in Headers */,
 				204C74251ABA0F9500A68988 /* TKAppDelegate.h in Headers */,
+				6B6F56A51CCFBAA000C1C7E5 /* TapkuLibrary+S.h in Headers */,
 				204C74271ABA0F9500A68988 /* TKViewController.h in Headers */,
 				204C742A1ABA0F9500A68988 /* TKAlertViewController.h in Headers */,
 				204C74311ABA0F9500A68988 /* TKNetworkQueue.h in Headers */,
@@ -649,6 +664,7 @@
 				204C745D1ABA0FFC00A68988 /* TKGlobal.m in Sources */,
 				204C746B1ABA0FFC00A68988 /* UIImage+TKCategory.m in Sources */,
 				204C747B1ABA0FFC00A68988 /* TKAppDelegate.m in Sources */,
+				6B6F56A61CCFBAA000C1C7E5 /* TapkuLibrary+S.m in Sources */,
 				204C747D1ABA0FFC00A68988 /* TKViewController.m in Sources */,
 				204C74801ABA0FFC00A68988 /* TKAlertViewController.m in Sources */,
 				204C74871ABA0FFC00A68988 /* TKNetworkQueue.m in Sources */,
