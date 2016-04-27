@@ -6,8 +6,4 @@
 //
 //
 
-
-
-@interface TapkuLibrary (S)
-
-@end
+#import "TapkuLibrary.h"
