@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "tapkulibrary"    #名称
-  s.version          = "1.0.2"             #版本号
+  s.version          = "1.0.3"             #版本号
   s.summary          = "Just Testing."     #简短介绍，下面是详细介绍
   s.description      = <<-DESC
                        Testing Private Podspec.
@@ -26,5 +26,5 @@ Pod::Spec.new do |s|
     ss.frameworks = 'curry'
   end
 
-  s.frameworks = 'UIKit','QuartzCore','Foundation','CoreGraphics','Accelerate'                  #所需的framework，多个用逗号隔开
+  s.frameworks = 'UIKit','QuartzCore','Foundation','CoreGraphics','Accelerate','curry'                #所需的framework，多个用逗号隔开
 end
