@@ -99,7 +99,7 @@
 		6B6D7A071CF535FC000753C1 /* UIView+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6D79A91CF535FC000753C1 /* UIView+TKCategory.m */; };
 		6B6D7A081CF535FC000753C1 /* UIViewController+TKCategory.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B6D79AA1CF535FC000753C1 /* UIViewController+TKCategory.h */; };
 		6B6D7A091CF535FC000753C1 /* UIViewController+TKCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6D79AB1CF535FC000753C1 /* UIViewController+TKCategory.m */; };
-		6B6D7A0D1CF5363F000753C1 /* TapkuLibrary_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 6B6D7A0B1CF5363F000753C1 /* TapkuLibrary_Prefix.pch */; };
+		6B6D7A0D1CF5363F000753C1 /* STapkuLibrary_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 6B6D7A0B1CF5363F000753C1 /* STapkuLibrary_Prefix.pch */; };
 		6B6D7A0E1CF5363F000753C1 /* TapkuLibrary.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6B6D7A0C1CF5363F000753C1 /* TapkuLibrary.bundle */; };
 		6B6D7A501CF538D8000753C1 /* NSDate+CalendarGrid.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B6D7A0F1CF538D8000753C1 /* NSDate+CalendarGrid.h */; };
 		6B6D7A511CF538D8000753C1 /* NSDate+CalendarGrid.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6D7A101CF538D8000753C1 /* NSDate+CalendarGrid.m */; };
@@ -167,7 +167,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6B6D79431CF53575000753C1 /* TapkuLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TapkuLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B6D79431CF53575000753C1 /* STapkuLibrary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = STapkuLibrary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B6D79481CF53575000753C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B6D794E1CF535FC000753C1 /* NSArray+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+TKCategory.h"; sourceTree = "<group>"; };
 		6B6D794F1CF535FC000753C1 /* NSArray+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+TKCategory.m"; sourceTree = "<group>"; };
@@ -261,7 +261,7 @@
 		6B6D79A91CF535FC000753C1 /* UIView+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+TKCategory.m"; sourceTree = "<group>"; };
 		6B6D79AA1CF535FC000753C1 /* UIViewController+TKCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+TKCategory.h"; sourceTree = "<group>"; };
 		6B6D79AB1CF535FC000753C1 /* UIViewController+TKCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+TKCategory.m"; sourceTree = "<group>"; };
-		6B6D7A0B1CF5363F000753C1 /* TapkuLibrary_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapkuLibrary_Prefix.pch; sourceTree = "<group>"; };
+		6B6D7A0B1CF5363F000753C1 /* STapkuLibrary_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = STapkuLibrary_Prefix.pch; sourceTree = "<group>"; };
 		6B6D7A0C1CF5363F000753C1 /* TapkuLibrary.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TapkuLibrary.bundle; sourceTree = "<group>"; };
 		6B6D7A0F1CF538D8000753C1 /* NSDate+CalendarGrid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+CalendarGrid.h"; sourceTree = "<group>"; };
 		6B6D7A101CF538D8000753C1 /* NSDate+CalendarGrid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+CalendarGrid.m"; sourceTree = "<group>"; };
@@ -344,7 +344,7 @@
 		6B6D79391CF53575000753C1 = {
 			isa = PBXGroup;
 			children = (
-				6B6D79451CF53575000753C1 /* TapkuLibrary */,
+				6B6D79451CF53575000753C1 /* STapkuLibrary */,
 				6B6D7A0A1CF53620000753C1 /* Other Source */,
 				6B6D79441CF53575000753C1 /* Products */,
 			);
@@ -353,12 +353,12 @@
 		6B6D79441CF53575000753C1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6B6D79431CF53575000753C1 /* TapkuLibrary.framework */,
+				6B6D79431CF53575000753C1 /* STapkuLibrary.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6B6D79451CF53575000753C1 /* TapkuLibrary */ = {
+		6B6D79451CF53575000753C1 /* STapkuLibrary */ = {
 			isa = PBXGroup;
 			children = (
 				6B6D7A0F1CF538D8000753C1 /* NSDate+CalendarGrid.h */,
@@ -520,13 +520,14 @@
 				6B6D79AB1CF535FC000753C1 /* UIViewController+TKCategory.m */,
 				6B6D79481CF53575000753C1 /* Info.plist */,
 			);
+			name = STapkuLibrary;
 			path = TapkuLibrary;
 			sourceTree = "<group>";
 		};
 		6B6D7A0A1CF53620000753C1 /* Other Source */ = {
 			isa = PBXGroup;
 			children = (
-				6B6D7A0B1CF5363F000753C1 /* TapkuLibrary_Prefix.pch */,
+				6B6D7A0B1CF5363F000753C1 /* STapkuLibrary_Prefix.pch */,
 				6B6D7A0C1CF5363F000753C1 /* TapkuLibrary.bundle */,
 			);
 			name = "Other Source";
@@ -566,7 +567,7 @@
 				6B6D79CA1CF535FC000753C1 /* TKMultiSwitch.h in Headers */,
 				6B6D79E21CF535FC000753C1 /* TKTextView.h in Headers */,
 				6B6D7A751CF538D8000753C1 /* TKLabelFieldCell.h in Headers */,
-				6B6D7A0D1CF5363F000753C1 /* TapkuLibrary_Prefix.pch in Headers */,
+				6B6D7A0D1CF5363F000753C1 /* STapkuLibrary_Prefix.pch in Headers */,
 				6B6D79E61CF535FC000753C1 /* TKWindow.h in Headers */,
 				6B6D79DA1CF535FC000753C1 /* TKStepperCell.h in Headers */,
 				6B6D79D81CF535FC000753C1 /* TKSoundAlertController.h in Headers */,
@@ -624,9 +625,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		6B6D79421CF53575000753C1 /* TapkuLibrary */ = {
+		6B6D79421CF53575000753C1 /* STapkuLibrary */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6B6D794B1CF53575000753C1 /* Build configuration list for PBXNativeTarget "TapkuLibrary" */;
+			buildConfigurationList = 6B6D794B1CF53575000753C1 /* Build configuration list for PBXNativeTarget "STapkuLibrary" */;
 			buildPhases = (
 				6B6D793E1CF53575000753C1 /* Sources */,
 				6B6D793F1CF53575000753C1 /* Frameworks */,
@@ -637,9 +638,9 @@
 			);
 			dependencies = (
 			);
-			name = TapkuLibrary;
+			name = STapkuLibrary;
 			productName = TapkuLibrary;
-			productReference = 6B6D79431CF53575000753C1 /* TapkuLibrary.framework */;
+			productReference = 6B6D79431CF53575000753C1 /* STapkuLibrary.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -656,7 +657,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6B6D793D1CF53575000753C1 /* Build configuration list for PBXProject "TapkuLibrary" */;
+			buildConfigurationList = 6B6D793D1CF53575000753C1 /* Build configuration list for PBXProject "STapkuLibrary" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -668,7 +669,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6B6D79421CF53575000753C1 /* TapkuLibrary */,
+				6B6D79421CF53575000753C1 /* STapkuLibrary */,
 			);
 		};
 /* End PBXProject section */
@@ -870,12 +871,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TapkuLibrary_Prefix.pch;
+				GCC_PREFIX_HEADER = STapkuLibrary_Prefix.pch;
 				INFOPLIST_FILE = TapkuLibrary/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunya365.TapkuLibrary;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = STapkuLibrary;
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
@@ -888,12 +889,12 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TapkuLibrary_Prefix.pch;
+				GCC_PREFIX_HEADER = STapkuLibrary_Prefix.pch;
 				INFOPLIST_FILE = TapkuLibrary/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunya365.TapkuLibrary;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = STapkuLibrary;
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -901,7 +902,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6B6D793D1CF53575000753C1 /* Build configuration list for PBXProject "TapkuLibrary" */ = {
+		6B6D793D1CF53575000753C1 /* Build configuration list for PBXProject "STapkuLibrary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6B6D79491CF53575000753C1 /* Debug */,
@@ -910,7 +911,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6B6D794B1CF53575000753C1 /* Build configuration list for PBXNativeTarget "TapkuLibrary" */ = {
+		6B6D794B1CF53575000753C1 /* Build configuration list for PBXNativeTarget "STapkuLibrary" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6B6D794C1CF53575000753C1 /* Debug */,

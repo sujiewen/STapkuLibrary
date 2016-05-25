@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:TapkuLibrary.xcodeproj">
+      location = "self:/Users/Sjw/Code/Github/STapkuLibrary/STapkuLibrary.xcodeproj">
    </FileRef>
 </Workspace>

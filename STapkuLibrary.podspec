@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
 
-  s.name         = "TapkuLibrary"
+  s.name         = "STapkuLibrary"
   s.version      = "1.1.0"
   s.summary      = "Sjw change  adaptation iPad"
 
@@ -19,7 +19,7 @@ TODO: Add long description of the pod here.Sjw change  adaptation iPad
 
   s.platform     = :ios, "7.0"
 
-  s.source       = { :git => "https://github.com/sujiewen/TapkuLibrary.git", :tag => "1.1.0" }
+  s.source       = { :git => "https://github.com/sujiewen/STapkuLibrary.git", :tag => "1.1.0" }
 
   s.source_files  = "TapkuLibrary/**/*.{h,m}"
 
