@@ -40,7 +40,7 @@
 	[super loadView];
 	
 	CGRect frame = self.view.frame;
-	frame.size.width = [UIDevice currentDevice].phoneIdiom ? CGRectGetWidth(self.view.frame) : 320;
+	frame.size.width = 320;
 	self.view.frame = frame;
 	
 	if([self respondsToSelector:@selector(edgesForExtendedLayout)])

@@ -30,7 +30,6 @@
  */
 
 @import UIKit;
-@import tapku;
 
 @interface NetworkRequestProgressViewController : TKViewController <TKHTTPRequestProgressDelegate>
 

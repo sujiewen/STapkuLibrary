@@ -29,9 +29,6 @@
  
  */
 
-
-@import tapku;
-
 @interface IndicatorsViewController : UIViewController 
 
 @property (nonatomic,strong) TKProgressBarView *progressBar;

@@ -30,7 +30,6 @@
  */
 
 @import UIKit;
-@import tapku;
 
 #pragma mark - MoreCellsViewController
 @interface MoreCellsViewController : UITableViewController 

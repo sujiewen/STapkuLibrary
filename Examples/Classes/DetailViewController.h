@@ -31,7 +31,7 @@
 
 
 @import UIKit;
-@import tapku;
+
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate, UITableViewDataSource>
 

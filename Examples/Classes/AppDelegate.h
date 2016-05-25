@@ -31,7 +31,7 @@
 
 
 @import UIKit;
-@import tapku;
+
 @class LeftTableViewController, DetailViewController;
 
 @class RootViewController;

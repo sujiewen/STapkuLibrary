@@ -30,7 +30,7 @@
  */
 
 @import UIKit;
-@import tapku;
+
 @class DetailViewController;
 
 @interface RootViewController : TKTableViewController

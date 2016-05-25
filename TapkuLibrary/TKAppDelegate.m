@@ -30,6 +30,7 @@
  */
 
 #import "TKAppDelegate.h"
+#import "TKWindow.h"
 
 @implementation TKAppDelegate
 

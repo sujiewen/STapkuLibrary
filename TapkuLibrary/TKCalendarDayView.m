@@ -29,11 +29,17 @@
  */
 
 #import "TKCalendarDayView.h"
+#import "NSDate+TKCategory.h"
 #import "UIImage+TKCategory.h"
 #import "TKGlobal.h"
+#import "TKGradientView.h"
+#import "UIColor+TKCategory.h"
+#import "UIImageView+TKCategory.h"
+#import "UIView+TKCategory.h"
+#import "UIScreen+TKCategory.h"
 
 #define NOB_SIZE 6.0f
-#define TOP_BAR_HEIGHT 84.0
+#define TOP_BAR_HEIGHT 64.0
 #define EVENT_SAME_HOUR 3.0
 #define HORIZONTAL_PAD 5.0f
 #define RIGHT_EVENT_INSET 10.0
@@ -46,7 +52,7 @@
 #define TIMELINE_HEIGHT VERTICAL_INSET * 2 + 24 * (VERTICAL_DIFF)
 #define DAY_FONT_SIZE 18
 #define WEEKEND_TEXT_COLOR [UIColor colorWithWhite:167/255. alpha:1]
-#define DAY_LABEL_WIDTH 35.0f
+
 
 #pragma mark - TKNowView
 @interface TKNowView : UIView
@@ -177,31 +183,29 @@
 	self.currentDay = [self _timelineAtIndex:1].date;
 	[self _updateDateLabel];
 	[self addSubview:self.daysBackgroundView];
-	[self addSubview:self.monthYearLabel];
+	//[self addSubview:self.monthYearLabel];
 	
 	
 	NSInteger cnt = 0;
 	NSArray *daySymbols = [[NSCalendar currentCalendar] shortWeekdaySymbols];
 	CGFloat wid = CGRectGetWidth(self.frame);
+	CGFloat xmargin = 20;
 	wid -= 8;
 	
-	NSInteger per = CGFrameGetWidth(self) - (DAY_LABEL_WIDTH *7);
-	per /= 7;
-	NSInteger minX = per / 2;
-	
 	for(NSString *str in daySymbols){
-		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(minX + cnt*(DAY_LABEL_WIDTH+per) , 0, DAY_LABEL_WIDTH, 20)];
+		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(xmargin + cnt* wid/daySymbols.count, 0, 40, 20)];
 		label.font = [UIFont systemFontOfSize:10];
 		label.text = [str substringToIndex:1];
 		label.textColor = cnt == 0 || cnt == 6 ? WEEKEND_TEXT_COLOR : [UIColor blackColor];
 		label.textAlignment = NSTextAlignmentCenter;
+		[label sizeToFit];
 		label.userInteractionEnabled = NO;
 		[self.daysBackgroundView addSubview:label];
-		[label sizeToFitWithAlignment];
-
 		cnt++;
 	}
 	
+
+
 	[self.daysBackgroundView addSubviewToBack:self.daysScrollView];
 	
 	UIView *dayContainerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.daysScrollView.contentSize.width, CGRectGetHeight(self.daysScrollView.frame))];
@@ -497,114 +501,120 @@
 	
 }
 - (void) _realignEventsAtIndex:(NSInteger)index{
-	
-	UIScrollView *sv = self.pages[index];
-	TKTimelineView *timeline = [self _timelineAtIndex:index];
-	
-
-	NSMutableArray *sameTimeEvents = [[NSMutableArray alloc] init];
-	NSInteger offsetCount = 0;
-	NSInteger repeatNumber = 0;		// number of nested appointments
-	CGFloat horizOffset = 0.0f;		// number of pixels to offset horizontally when they are nested
-	CGFloat startMarker = -100.0f;	// starting point to check if they match
-	CGFloat endMarker = -100.0f;
-	
-	
-	CGFloat topOrigin = -1;
-	
-	for (TKCalendarDayEventView *event in timeline.events) {
-		
-		
-		if(event.gestureRecognizers.count<1){
-			UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewWasTapped:)];
-			[event addGestureRecognizer:tap];
-		}
-		
-		
-		BOOL startSameDay = [event.startDate isSameDay:timeline.date timeZone:self.calendar.timeZone];
-		
-		if(!startSameDay && (([event.startDate compare:timeline.date] == NSOrderedAscending && [event.endDate compare:timeline.date] == NSOrderedAscending) || ([event.startDate compare:timeline.date] == NSOrderedDescending))) continue;
-
-		BOOL endSameDay = [event.endDate isSameDay:timeline.date timeZone:self.calendar.timeZone];
-		NSDateComponents *startComp = [event.startDate dateComponentsWithTimeZone:self.calendar.timeZone];
-		NSDateComponents *endComp = [event.endDate dateComponentsWithTimeZone:self.calendar.timeZone];
-
-		NSInteger hourStart = startSameDay ? startComp.hour : 0;
-		CGFloat hourStartPosition = hourStart * VERTICAL_DIFF + VERTICAL_INSET;
-		
-		NSInteger minuteStart = startSameDay ? round(startComp.minute / 5.0) * 5 : 0;
-		CGFloat minuteStartPosition = roundf((CGFloat)minuteStart / 60.0f * VERTICAL_DIFF);
-		
-		NSInteger hourEnd = endSameDay ? endComp.hour : 23;
-		CGFloat hourEndPosition = hourEnd * VERTICAL_DIFF + VERTICAL_INSET;
-
-		NSInteger minuteEnd = endSameDay ? round(endComp.minute / 5.0) * 5 : 60;
-		CGFloat minuteEndPosition = roundf((CGFloat)minuteEnd / 60.0f * VERTICAL_DIFF);
-		
-		CGFloat eventHeight = hourEndPosition + minuteEndPosition - hourStartPosition - minuteStartPosition;
-		eventHeight = MAX(roundf(VERTICAL_DIFF/2), eventHeight);
-		
-		
-		
-		
-		// nobre additions - split control and offset control				
-		// split control - adjusts balloon widths so their times/titles don't overlap
-		// offset control - adjusts starting balloon position so you can see all starts/ends
-		if ((hourStartPosition + minuteStartPosition) - startMarker < 1) {
-			repeatNumber++;
-		} else {
-			repeatNumber = 0;
-			[sameTimeEvents removeAllObjects];
-			//if this event starts before the last event's end, we have to offset it!
-			if (hourStartPosition + minuteStartPosition < endMarker) {
-				horizOffset = EVENT_SAME_HOUR * ++offsetCount;
-			}
-			else {
-				horizOffset = 0.0f;
-				offsetCount = 0;
-			}
-		}
-		
-
-		
-		
-		
-		CGFloat eventWidth = (CGRectGetWidth(self.bounds)  - LEFT_INSET - RIGHT_EVENT_INSET)/(repeatNumber+1);
-		CGFloat eventOriginX = LEFT_INSET + 2.0f + horizOffset;
-		CGRect eventFrame = CGRectMake(eventOriginX + (repeatNumber*eventWidth), hourStartPosition + minuteStartPosition, eventWidth, eventHeight);
-		event.frame = CGRectIntegral(eventFrame);
-		[event setNeedsLayout];
-		[sv addSubview:event];
-		
-		for (NSInteger i = [sameTimeEvents count]-1; i >= 0; i--) {
-			TKCalendarDayEventView *sameTimeEvent = sameTimeEvents[i];
-			CGRect newFrame = sameTimeEvent.frame;
-			newFrame.size.width = eventWidth;
-			newFrame.origin.x = eventOriginX + (i*(eventWidth));
-			sameTimeEvent.frame = CGRectIntegral(newFrame);
-			[sameTimeEvent setNeedsLayout];
-		}
-		[sameTimeEvents addObject:event];
-		
-		[event setNeedsLayout];
-		
-		
-		startMarker = hourStartPosition + minuteStartPosition;
-		endMarker = MAX(endMarker,hourEndPosition + minuteEndPosition);
-		
-		if(topOrigin<0)
-			topOrigin = startMarker;
-		
-		topOrigin = MIN(topOrigin,startMarker);
-		
-	}
-	
-	if(topOrigin>0)
-		timeline.startY = topOrigin;
-	if(sv == self.nowLineView.superview)
-		[sv bringSubviewToFront:self.nowLineView];
-	
+    
+    UIScrollView *sv = self.pages[index];
+    TKTimelineView *timeline = [self _timelineAtIndex:index];
+    
+    
+    NSMutableArray *sameTimeEvents = [[NSMutableArray alloc] init];
+    NSInteger offsetCount = 0;
+    NSInteger repeatNumber = 0;		// number of nested appointments
+    CGFloat horizOffset = 0.0f;		// number of pixels to offset horizontally when they are nested
+    CGFloat startMarker = -100.0f;	// starting point to check if they match
+    CGFloat endMarker = -100.0f;
+    
+    
+    CGFloat topOrigin = -1;
+    
+#pragma 为了事件条宽度设个变量
+    int event_i = 0;
+    for (TKCalendarDayEventView *event in timeline.events) {
+        
+        
+        if(event.gestureRecognizers.count<1){
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollViewWasTapped:)];
+            [event addGestureRecognizer:tap];
+        }
+        
+        
+        BOOL startSameDay = [event.startDate isSameDay:timeline.date timeZone:self.calendar.timeZone];
+        
+        if(!startSameDay && (([event.startDate compare:timeline.date] == NSOrderedAscending && [event.endDate compare:timeline.date] == NSOrderedAscending) || ([event.startDate compare:timeline.date] == NSOrderedDescending))) continue;
+        
+        BOOL endSameDay = [event.endDate isSameDay:timeline.date timeZone:self.calendar.timeZone];
+        NSDateComponents *startComp = [event.startDate dateComponentsWithTimeZone:self.calendar.timeZone];
+        NSDateComponents *endComp = [event.endDate dateComponentsWithTimeZone:self.calendar.timeZone];
+        
+        NSInteger hourStart = startSameDay ? startComp.hour : 0;
+        CGFloat hourStartPosition = hourStart * VERTICAL_DIFF + VERTICAL_INSET;
+        
+        NSInteger minuteStart = startSameDay ? round(startComp.minute / 5.0) * 5 : 0;
+        CGFloat minuteStartPosition = roundf((CGFloat)minuteStart / 60.0f * VERTICAL_DIFF);
+        
+        NSInteger hourEnd = endSameDay ? endComp.hour : 23;
+        CGFloat hourEndPosition = hourEnd * VERTICAL_DIFF + VERTICAL_INSET;
+        
+        NSInteger minuteEnd = endSameDay ? round(endComp.minute / 5.0) * 5 : 60;
+        CGFloat minuteEndPosition = roundf((CGFloat)minuteEnd / 60.0f * VERTICAL_DIFF);
+        
+        CGFloat eventHeight = hourEndPosition + minuteEndPosition - hourStartPosition - minuteStartPosition;
+        eventHeight = MAX(roundf(VERTICAL_DIFF/2), eventHeight);
+        
+        
+        
+        
+        // nobre additions - split control and offset control
+        // split control - adjusts balloon widths so their times/titles don't overlap
+        // offset control - adjusts starting balloon position so you can see all starts/ends
+        if ((hourStartPosition + minuteStartPosition) - startMarker < 1) {
+            repeatNumber++;
+        } else {
+            repeatNumber = 0;
+            [sameTimeEvents removeAllObjects];
+            //if this event starts before the last event's end, we have to offset it!
+            if (hourStartPosition + minuteStartPosition < endMarker) {
+                horizOffset = EVENT_SAME_HOUR * ++offsetCount;
+            }
+            else {
+                horizOffset = 0.0f;
+                offsetCount = 0;
+            }
+        }
+        
+        
+        
+#pragma 事件条宽度
+        CGFloat eventWidth = ([UIScreen mainScreen].bounds.size.width / 3 * 2 - 50) / timeline.events.count;
+        CGFloat eventOriginX = LEFT_INSET + eventWidth * event_i;
+        event_i++;
+        //        CGFloat eventWidth = (CGRectGetWidth(self.bounds)  - LEFT_INSET - RIGHT_EVENT_INSET)/(repeatNumber+1);
+        //		CGFloat eventOriginX = LEFT_INSET + 2.0f + horizOffset;
+        //		CGRect eventFrame = CGRectMake(eventOriginX + (repeatNumber*eventWidth), hourStartPosition + minuteStartPosition, eventWidth, eventHeight);
+        CGRect eventFrame = CGRectMake(eventOriginX, hourStartPosition + minuteStartPosition, eventWidth, eventHeight);
+        event.frame = CGRectIntegral(eventFrame);
+        [event setNeedsLayout];
+        [sv addSubview:event];
+        
+        //		for (NSInteger i = [sameTimeEvents count]-1; i >= 0; i--) {
+        //			TKCalendarDayEventView *sameTimeEvent = sameTimeEvents[i];
+        //			CGRect newFrame = sameTimeEvent.frame;
+        //			newFrame.size.width = eventWidth;
+        //			newFrame.origin.x = eventOriginX + (i*(eventWidth));
+        //			sameTimeEvent.frame = CGRectIntegral(newFrame);
+        //			[sameTimeEvent setNeedsLayout];
+        //		}
+        //		[sameTimeEvents addObject:event];
+        //
+        //		[event setNeedsLayout];
+        
+        
+        startMarker = hourStartPosition + minuteStartPosition;
+        endMarker = MAX(endMarker,hourEndPosition + minuteEndPosition);
+        
+        if(topOrigin<0)
+            topOrigin = startMarker;
+        
+        topOrigin = MIN(topOrigin,startMarker);
+        
+    }
+    
+    if(topOrigin>0)
+        timeline.startY = topOrigin;
+    if(sv == self.nowLineView.superview)
+        [sv bringSubviewToFront:self.nowLineView];
+    
 }
+
 
 
 #pragma mark WeekDay
@@ -1004,7 +1014,8 @@
 }
 - (UIScrollView*) daysScrollView{
 	if(_daysScrollView) return _daysScrollView;
-	_daysScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetMinY(self.monthYearLabel.frame))];
+//	_daysScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetMinY(self.monthYearLabel.frame))];
+    _daysScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), 64)];
 	_daysScrollView.pagingEnabled = YES;
 	_daysScrollView.delegate = self;
 	_daysScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.daysScrollView.frame)*3.0, 0);
@@ -1126,20 +1137,16 @@
 
 
 
-
+#define DAY_LABEL_WIDTH 35.0f
 @implementation TKWeekdaysView
 - (instancetype) initWithFrame:(CGRect)frame{
 	if(!(self=[super initWithFrame:frame])) return nil;
 	
-	NSInteger per = CGFrameGetWidth(self) - (DAY_LABEL_WIDTH *7);
-	per /= 7;
-	NSInteger minX = per / 2;
 	
 	NSMutableArray *labels = [NSMutableArray arrayWithCapacity:7];
 	for(NSInteger i=0;i<7;i++){
-		TKDateLabel *label = [[TKDateLabel alloc] initWithFrame:CGRectMake(minX+(DAY_LABEL_WIDTH+per)*i, 16, DAY_LABEL_WIDTH, DAY_LABEL_WIDTH)];
+		TKDateLabel *label = [[TKDateLabel alloc] initWithFrame:CGRectMake(8+(DAY_LABEL_WIDTH+9)*i, 16, DAY_LABEL_WIDTH, DAY_LABEL_WIDTH)];
 		label.weekend = i % 6 == 0;
-		//label.backgroundColor = [UIColor redColor];
 		[self addSubviewToBack:label];
 		[labels addObject:label];
 	}
@@ -1205,7 +1212,6 @@
 
 #pragma mark - TKNowView
 @implementation TKNowView
-
 - (instancetype) init{
 	if(!(self=[super initWithFrame:CGRectMake(0, 0, 320, 14)])) return nil;
 	
@@ -1216,6 +1222,8 @@
 	self.timeLabel.textColor = self.tintColor;
 	self.timeLabel.font = [UIFont boldSystemFontOfSize:10];
 	[self addSubview:self.timeLabel];
+	
+
 	
 	UIView *nob = [[UIView alloc] initWithFrame:CGRectMake(LEFT_INSET + 1, 3, 6, 6)];
 	nob.backgroundColor = self.tintColor;
@@ -1237,6 +1245,7 @@
 	self.clipsToBounds = YES;
 	
 	[self updateTime];
+	
 	
 	return self;
 }

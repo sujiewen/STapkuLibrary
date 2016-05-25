@@ -30,9 +30,6 @@
  */
 
 @import UIKit;
-@import tapku;
-
-//@import tapku;
 
 @interface AlertsViewController : UIViewController
 

@@ -29,9 +29,6 @@
  
  */
 
-
-@import tapku;
-
 @interface LabelViewController : UITableViewController
 
 @property (nonatomic,strong) NSArray *cells;

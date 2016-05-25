@@ -29,6 +29,7 @@
  
  */
 #import "TKTextViewCell.h"
+#import "TKTextView.h"
 
 @implementation TKTextViewCell
 

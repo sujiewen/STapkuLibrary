@@ -31,7 +31,8 @@
 
 @import UIKit;
 @import QuartzCore;
-@import curry;
+#import "TKGradientView.h"
+
 
 /**
  The glyph that appears with the empty view.

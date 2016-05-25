@@ -1,0 +1,39 @@
+--- old/TKCalendarDayView.m	2016-05-03 14:08:09.000000000 +0800
++++ new/TKCalendarDayView.m	2016-05-03 14:46:58.000000000 +0800
+@@ -33,7 +33,7 @@
+ #import "TKGlobal.h"
+ 
+ #define NOB_SIZE 6.0f
+-#define TOP_BAR_HEIGHT 84.0
++#define TOP_BAR_HEIGHT 64.0
+ #define EVENT_SAME_HOUR 3.0
+ #define HORIZONTAL_PAD 5.0f
+ #define RIGHT_EVENT_INSET 10.0
+@@ -177,7 +177,7 @@
+ 	self.currentDay = [self _timelineAtIndex:1].date;
+ 	[self _updateDateLabel];
+ 	[self addSubview:self.daysBackgroundView];
+-	[self addSubview:self.monthYearLabel];
++	//[self addSubview:self.monthYearLabel];
+ 	
+ 	
+ 	NSInteger cnt = 0;
+@@ -1004,7 +1004,8 @@
+ }
+ - (UIScrollView*) daysScrollView{
+ 	if(_daysScrollView) return _daysScrollView;
+-	_daysScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetMinY(self.monthYearLabel.frame))];
++//	_daysScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), CGRectGetMinY(self.monthYearLabel.frame))];
++    _daysScrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.frame), 64)];
+ 	_daysScrollView.pagingEnabled = YES;
+ 	_daysScrollView.delegate = self;
+ 	_daysScrollView.contentSize = CGSizeMake(CGRectGetWidth(self.daysScrollView.frame)*3.0, 0);
+@@ -1118,7 +1119,7 @@
+ 			 @"13:00",@"14:00",@"15:00",@"16:00",@"17:00",@"18:00",@"19:00",@"20:00",@"21:00",@"22:00",@"23:00",@"00:00"];
+ 	else
+ 		_times = @[@"12",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",
+-			 @"Noon",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12"];
++			 @"12",@"13",@"14",@"15",@"16",@"17",@"18",@"19",@"20",@"21",@"22",@"23",@"24"];
+     
+ 	return _times;
+ }

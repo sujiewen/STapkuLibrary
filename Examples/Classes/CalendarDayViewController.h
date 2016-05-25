@@ -29,7 +29,6 @@
  
  */
 
-@import tapku;
 @import UIKit;
 
 @interface CalendarDayViewController : TKCalendarDayViewController

@@ -30,6 +30,7 @@
  */
 
 #import "TKAlertCenter.h"
+#import "UIView+TKCategory.h"
 #import "TKGlobal.h"
 
 #pragma mark - TKAlertView
@@ -73,14 +74,10 @@
 	[[UIColor colorWithWhite:0 alpha:0.8] set];
 	[self _drawRoundRectangleInRect:rect withRadius:10];
 	[[UIColor whiteColor] set];
-
-    
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
-    paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-    paragraphStyle.alignment = NSTextAlignmentCenter;
-	NSDictionary *dict = @{ NSFontAttributeName: [UIFont boldSystemFontOfSize:14], NSParagraphStyleAttributeName: paragraphStyle, NSForegroundColorAttributeName : [UIColor whiteColor] };
-	[_messageText drawInRect:_messageRect withAttributes:dict];
-
+	[_messageText drawInRect:_messageRect
+			 withFont:[UIFont boldSystemFontOfSize:14]
+		lineBreakMode:NSLineBreakByWordWrapping
+			alignment:NSTextAlignmentCenter];
 	
 	CGRect r = CGRectZero;
 	r.origin.y = 15;
@@ -93,14 +90,9 @@
 #pragma mark Setter Methods
 - (void) adjust{
 	
-    
-    CGSize s = [_messageText boundingRectWithSize:CGSizeMake(160,200)
-                                             options:NSLineBreakByWordWrapping | NSStringDrawingUsesLineFragmentOrigin
-                                          attributes:@{ NSFontAttributeName : [UIFont boldSystemFontOfSize:14]}
-                                             context:nil].size;
-    
-    
-    [_messageText sizeWithAttributes:@{ NSFontAttributeName: [UIFont boldSystemFontOfSize:14]}];
+	CGSize s = [_messageText sizeWithFont:[UIFont boldSystemFontOfSize:14]
+				 constrainedToSize:CGSizeMake(160,200)
+					 lineBreakMode:NSLineBreakByWordWrapping];
 	
 	float imageAdjustment = 0;
 	if (_image) {
@@ -275,8 +267,8 @@ CGRect subtractRect(CGRect wf,CGRect kf){
 	}else{
 		
 		
-		kf.origin.x = fabs(kf.size.width - wf.size.width);
-		kf.origin.y = fabs(kf.size.height -  wf.size.height);
+		kf.origin.x = abs(kf.size.width - wf.size.width);
+		kf.origin.y = abs(kf.size.height -  wf.size.height);
 		
 		
 		if(kf.origin.x > 0){

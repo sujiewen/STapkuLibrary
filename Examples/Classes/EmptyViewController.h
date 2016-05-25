@@ -30,8 +30,6 @@
  */
 
 
-@import tapku;
-
 @interface EmptyViewController : UIViewController
 
 @property (nonatomic,strong) TKEmptyView *emptyView;
